@@ -1,0 +1,35 @@
+.app {
+  min-height: 100vh;
+}
+
+.clock {
+  border: 5px solid;
+  height: 250px;
+  width: 540px;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+}
+
+.display {
+  flex-basis: 70%;
+}
+
+.display, .painel, .app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.painel {
+  flex-basis: 30%;
+  gap: 1rem;
+}
+
+.time {
+  font-size: 5rem;
+}
+
+.session-painel, .break-painel {
+  text-align: center;
+}
