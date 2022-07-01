@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import { Display } from './Display'
 
 function App() {
   const [sessionTime, setSessionTime] = useState(25)
@@ -145,10 +146,6 @@ function App() {
     })
   }
 
-  const Display = () => {
-    return displayTimeBreak ? `${timeBreakConfig.minute}:${timeBreakConfig.second}`: `${sessionTimeConfig.minute}:${sessionTimeConfig.second}`
-  }
-
   return (
     <div className="app">
       <h1>25 + 5 clock</h1>
@@ -156,7 +153,13 @@ function App() {
       <div className="display">
         <div id="timer-label">{displayTimeBreak ? "Break" : "Session"}</div>
         <div className="time" id="time-left">
-          <Display />
+          <Display 
+            displayTimeBreak={displayTimeBreak}
+            timeBreakMinute={timeBreakConfig.minute}
+            timeBreakSecond={timeBreakConfig.second}
+            sessionTimeMinute={sessionTimeConfig.minute}
+            sessionTimeSecond={sessionTimeConfig.second}
+          />
         </div>
         <div className="controls">
           <button onClick={startClock} id="start_stop">play</button>
