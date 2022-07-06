@@ -190,9 +190,12 @@ function App() {
         </div>
         <audio src={alarmSound} id="beep"></audio>
         <div className="controls">
-          <button onClick={startClock} id="start_stop">play</button>
-          <button onClick={pauseClock}>pause</button>
-          <button onClick={resetClock} id="reset">reset</button>
+          <button onClick={handleClick} id="start_stop">
+            {
+              !isClockOn ? <MdPlayArrow /> : <MdPause />
+            }
+          </button>
+          <button onClick={resetClock} id="reset"><MdRestartAlt /></button>
         </div>
       </div>
     
