@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { Display } from './Display'
+import { Display } from './components/Display'
+import { MdRestartAlt, MdPause, MdPlayArrow } from 'react-icons/md'
+import alarmSound from './asset/alarm.mp3'
 
 function App() {
   const [sessionTime, setSessionTime] = useState(25)
@@ -22,6 +24,7 @@ function App() {
 
   useEffect(() => {
     if (sessionTimeConfig.second === 0 && sessionTimeConfig.minute === 0 && !displayTimeBreak) {
+      playAlarmSound()
       clearInterval(sessionTimeConfig.id)
       startTimeBreak()
       setDisplayTimeBreak(true)
@@ -31,6 +34,7 @@ function App() {
     }
 
     if (timeBreakConfig.minute === 0 && timeBreakConfig.second === 0 && displayTimeBreak) {
+      playAlarmSound()
       clearTimeout(timeBreakConfig.id)
       setDisplayTimeBreak(false)
       setTimeBreakConfig(state => {
@@ -39,6 +43,17 @@ function App() {
       startClock()
     }
   }, [sessionTimeConfig, timeBreakConfig])
+
+  const playAlarmSound = () => {
+    const audio = document.getElementById("beep") as HTMLAudioElement
+    audio.play()
+  }
+
+  const resetAlarmSound = () => {
+    const audio = document.getElementById("beep") as HTMLAudioElement
+    audio.pause
+    audio.currentTime = 0
+  }
 
   const decrementSessionTime = () => {
     if (!isClockOn) {
@@ -161,6 +176,7 @@ function App() {
             sessionTimeSecond={sessionTimeConfig.second}
           />
         </div>
+        <audio src={alarmSound} id="beep"></audio>
         <div className="controls">
           <button onClick={startClock} id="start_stop">play</button>
           <button onClick={pauseClock}>pause</button>
