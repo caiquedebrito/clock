@@ -120,9 +120,20 @@ function App() {
     })
   }
 
-  const startClock = () => {
+  const handleClick = () => {
+    setIsClockOn(!isClockOn)
     if (!isClockOn) {
-      setIsClockOn(!isClockOn)
+      if (displayTimeBreak) {
+        startTimeBreak() 
+      } else {
+        startSessionTime()
+      }
+    } else {
+      pauseClock()
+    }
+  }
+
+  const startSessionTime = () => {
       const id = setInterval(() => {
         setSessionTimeConfig(state => {
           if (state.second === 0) {
