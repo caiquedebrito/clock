@@ -8,19 +8,17 @@ function App() {
   const [sessionTime, setSessionTime] = useState(25)
   const [timeBreak, setTimeBreak] = useState(5)
   const [isClockOn, setIsClockOn] = useState(false)
-
+  const [displayTimeBreak, setDisplayTimeBreak] = useState(false)
   const [sessionTimeConfig, setSessionTimeConfig] = useState({
     id: 0,
     minute: 25,
     second: 0
   })
-
   const [timeBreakConfig, setTimeBreakConfig] = useState({
     id: 0,
     minute: 5,
     second: 0
   })
-  const [displayTimeBreak, setDisplayTimeBreak] = useState(false)
 
   useEffect(() => {
     if (sessionTimeConfig.second === 0 && sessionTimeConfig.minute === 0 && !displayTimeBreak) {
@@ -40,7 +38,7 @@ function App() {
       setTimeBreakConfig(state => {
         return {...state, minute: timeBreak}
       })
-      startClock()
+      startSessionTime()
     }
   }, [sessionTimeConfig, timeBreakConfig])
 
@@ -57,7 +55,6 @@ function App() {
 
   const decrementSessionTime = () => {
     if (!isClockOn) {
-      
       setSessionTimeConfig(state => {
         if (state.minute > 1) {
           return {...state, minute: state.minute - 1}
@@ -102,17 +99,16 @@ function App() {
 
   const startTimeBreak = () => {
     if (!displayTimeBreak) {
-    setTimeBreakConfig(state => {
-      return {...state, minute: timeBreak}
-    })
+      setTimeBreakConfig(state => {
+        return {...state, minute: timeBreak}
+      })
     }
-
+    
     const id = setInterval(() => {
       setTimeBreakConfig(state => {
         if (state.second === 0) {
           return {...state, minute: state.minute - 1, second: 59}
         }
-
         return {...state, second: state.second - 1}
       })
     }, 1000)
@@ -136,29 +132,24 @@ function App() {
   }
 
   const startSessionTime = () => {
-      const id = setInterval(() => {
-        setSessionTimeConfig(state => {
-          if (state.second === 0) {
-            return {...state, minute: state.minute - 1, second: 59}
-          }
-          return {...state, second: state.second - 1}
-        })
-  
-      }, 1000)
-  
+    const id = setInterval(() => {
       setSessionTimeConfig(state => {
-        return {...state, id: id}
+        if (state.second === 0) {
+          return {...state, minute: state.minute - 1, second: 59}
+        }
+        return {...state, second: state.second - 1}
       })
-    }
-    
+
+    }, 1000)
+
+    setSessionTimeConfig(state => {
+      return {...state, id: id}
+    })    
   }
 
   const pauseClock = () => {
-    if (isClockOn) {
-      setIsClockOn(false)
       clearInterval(sessionTimeConfig.id)
       clearInterval(timeBreakConfig.id)
-    }
   }
 
   const resetClock = () => {
