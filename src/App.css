@@ -5,13 +5,15 @@
 .clock {
   border: 5px solid;
   height: 250px;
-  width: 540px;
+  max-width: 540px;
+  width: 100%;
   border-radius: 20px 20px 0 0;
   display: flex;
 }
 
 .display {
   flex-basis: 70%;
+  gap: 1.2rem;
 }
 
 .display, .painel, .app {
@@ -24,6 +26,7 @@
 .painel {
   flex-basis: 30%;
   gap: 1rem;
+  border-left: 5px solid;
 }
 
 .time {
@@ -32,4 +35,29 @@
 
 .session-painel, .break-painel {
   text-align: center;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+#timer-label, #session-label, #break-label {
+  font-weight: bold;
+}
+
+.red {
+  color: red;
+  animation: blink-number .8s ease-in-out infinite;
+}
+
+@keyframes blink-number {
+  from {
+    color: white;
+  } 
+  to {
+    color: red;
+  }
 }
