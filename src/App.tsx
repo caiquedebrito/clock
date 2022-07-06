@@ -149,6 +149,7 @@ function App() {
   }
 
   const resetClock = () => {
+    resetAlarmSound()
     setIsClockOn(false)
     setDisplayTimeBreak(false)
     clearInterval(sessionTimeConfig.id)
