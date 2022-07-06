@@ -18,6 +18,11 @@ export const Display = ({
     const [display, setDisplay] = useState("")
 
     useEffect(() => {
+        formatTimer()
+        formatLastSeconds()
+    }, [sessionTimeMinute, sessionTimeSecond, timeBreakMinute, timeBreakSecond, displayTimeBreak])
+
+    const formatTimer = () => {
         let minutes: string | number
         let seconds: string | number
 
@@ -30,13 +35,17 @@ export const Display = ({
         }
         
         setDisplay(`${minutes}:${seconds}`)
-
-    }, [sessionTimeMinute, sessionTimeSecond, timeBreakMinute, timeBreakSecond, displayTimeBreak])
-    
-
-    return <div>
-    {
-       display
     }
-    </div>
+
+    const formatLastSeconds = () => {
+        const timer = document.querySelector(".timer")
+
+        if ((sessionTimeMinute === 0 && sessionTimeSecond <= 10 && !displayTimeBreak) || (timeBreakMinute === 0 && timeBreakSecond <= 10 && displayTimeBreak)) {
+            timer?.classList.add("red")
+        } else {
+            timer?.classList.remove("red")
+        }
+    }
+    
+    return <div className="timer">{ display }</div>
 }
