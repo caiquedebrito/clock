@@ -101,9 +101,11 @@ function App() {
   }
 
   const startTimeBreak = () => {
+    if (!displayTimeBreak) {
     setTimeBreakConfig(state => {
       return {...state, minute: timeBreak}
     })
+    }
 
     const id = setInterval(() => {
       setTimeBreakConfig(state => {
