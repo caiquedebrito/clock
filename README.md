@@ -7,7 +7,7 @@
 </div>
 
 <div align="center">
-    <img src="![screencapture-localhost-3000-2022-08-14-14_49_39](https://user-images.githubusercontent.com/88737351/184548820-963a4c0d-8b99-499b-af37-820215232c5e.png)
+    <img src="https://user-images.githubusercontent.com/88737351/184548820-963a4c0d-8b99-499b-af37-820215232c5e.png
 " alt="Gif do funcionamento do projeto"/>
 </div>
 
